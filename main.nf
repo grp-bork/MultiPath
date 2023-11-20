@@ -60,17 +60,25 @@ params.assembler = "megahit"
 
 workflow {
 
-	metaT_input(
-		Channel.fromPath(params.metaT_input_dir + "/*", type: "dir")
-	)
-	metaG_input(
-		Channel.fromPath(params.metaG_input_dir + "/*", type: "dir")
-	)
+	nvm_input_ch = Channel.empty()
+	metaT_ch = Channel.empty()
+	if (params.metaT_input_dir) {
+		metaT_input(
+			Channel.fromPath(params.metaT_input_dir + "/*", type: "dir")
+		)
+		metaT_ch = metaT_input.out.reads
+		nvm_input_ch = nvm_input_ch.concat(metaT_ch)
+	}
+	metaG_ch = Channel.empty()
+	if (params.metaG_input_dir) {
+		metaG_input(
+			Channel.fromPath(params.metaG_input_dir + "/*", type: "dir")
+		)
+		metaG_ch = metaG_input.out.reads
+		nvm_input_ch = nvm_input_ch.concat(metaG_ch)
+	}
 
-	metaT_ch = metaT_input.out.reads		
-	metaG_ch = metaG_input.out.reads		
-
-	nevermore_main(metaT_ch.concat(metaG_ch))
+	nevermore_main(nvm_input_ch)
 
 
 	empty_file = file("${launchDir}/NO_INPUT")
