@@ -3,19 +3,19 @@
 nextflow.enable.dsl=2
 
 include { nevermore_main } from "./nevermore/workflows/nevermore"
-include { gffquant_flow } from "./nevermore/workflows/gffquant"
+// include { gffquant_flow } from "./nevermore/workflows/gffquant"
 // include { fastq_input } from "./nevermore/workflows/input"
 include { metaT_input; metaG_input } from "./imp/workflows/input"
 
-include { rnaspades; metaspades } from "./imp/modules/assemblers/spades"
-include { bwa_index } from "./imp/modules/alignment/indexing/bwa_index"
-include { extract_unmapped } from "./imp/modules/alignment/extract"
+// include { rnaspades; metaspades } from "./imp/modules/assemblers/spades"
+// include { bwa_index } from "./imp/modules/alignment/indexing/bwa_index"
+// include { extract_unmapped } from "./imp/modules/alignment/extract"
 
-include { metaT_assembly } from "./imp/workflows/meta_t"
+// include { metaT_assembly } from "./imp/workflows/meta_t"
 include { assembly_prep } from "./imp/workflows/input"
-include { hybrid_megahit } from "./imp/modules/assemblers/megahit"
-include { get_unmapped_reads } from "./imp/workflows/extract"
-include { concatenate_contigs; filter_fastq } from "./imp/modules/assemblers/functions"
+// include { hybrid_megahit } from "./imp/modules/assemblers/megahit"
+// include { get_unmapped_reads } from "./imp/workflows/extract"
+// include { concatenate_contigs; filter_fastq } from "./imp/modules/assemblers/functions"
 
 include { unicycler } from "./multi/modules/assembler/unicycler"
 
@@ -33,22 +33,6 @@ include { unicycler } from "./multi/modules/assembler/unicycler"
 // }
 
 // each sample has at most 2 groups of files: [2 x PE, 1 x orphan], [1 x singles]
-workflow assembly_prep {
-	take:
-		fastq_ch
-	main:
-		initial_assembly_ch = fastq_ch
-			.map { sample, fastqs -> 
-				def new_sample = sample.clone()
-				new_sample.id = sample.id.replaceAll(/.(orphans|singles|chimeras)$/, "")
-				
-				return tuple(new_sample, [fastqs].flatten())
-			}
-			.groupTuple(by: 0, size: 2, remainder: true)
-			.map { sample, fastqs -> return tuple(sample, fastqs.flatten())}
-	emit:
-		reads = initial_assembly_ch
-}
 
 
 def input_dir = (params.input_dir) ? params.input_dir : params.remote_input_dir
