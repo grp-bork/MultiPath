@@ -23,11 +23,11 @@ process unicycler {
 	if (r2_files.size() != 0) {
 		input_files += " -2 ${r2_files.join(' ')}"
 	}
-	if (orphans.size() != 0) {
-		input_files += " -s ${orphans.join(' ')}"
+	if (orphan_files.size() != 0) {
+		input_files += " -s ${orphan_files.join(' ')}"
 	}
 	if (long_read_files.size() > 0) {
-		input_files += " -l ${long_read_files.join(',')}"
+		input_files += " -l ${long_read_files.join(' ')}"
 	}
 		
 	"""
