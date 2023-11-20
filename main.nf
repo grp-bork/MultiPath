@@ -77,7 +77,10 @@ workflow {
 	)
 
 	metaG_assembly_ch = assembly_prep.out.reads
-		.map { sample, fastqs -> return tuple(sample, fastqs, [empty_file]) }
+		.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
+		.groupTuple(by: 0, size: 2, remainder: true)
+		.map { sample_id, sample, short_reads -> return tuple(sample, [short_reads].flatten(), [empty_file])}
+
 
 	metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
 
