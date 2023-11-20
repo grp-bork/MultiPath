@@ -11,9 +11,9 @@ process unicycler {
 	def r1_files = []
 	def r2_files = []
 	def orphan_files = []
-	r1_files.addAll(fastqs.findAll( { it.name.endsWith("_R1.fastq.gz") && !it.name.matches("(.*)(singles|orphans|chimeras)(.*)") && it.name.matches("(.*)metaG(.*)") } ))
-	r2_files.addAll(fastqs.findAll( { it.name.endsWith("_R2.fastq.gz") && it.name.matches("(.*)metaG(.*)") } ))
-	orphan_files.addAll(fastqs.findAll( { it.name.matches("(.*)(singles|orphans|chimeras)(.*)") && it.name.matches("(.*)metaG(.*)") } ))
+	r1_files.addAll(short_reads.findAll( { it.name.endsWith("_R1.fastq.gz") && !it.name.matches("(.*)(singles|orphans|chimeras)(.*)") } ))
+	r2_files.addAll(short_reads.findAll( { it.name.endsWith("_R2.fastq.gz") } ))
+	orphan_files.addAll(short_reads.findAll( { it.name.matches("(.*)(singles|orphans|chimeras)(.*)") } ))
 	long_read_files.addAll(long_reads.findAll( { it.name != "NO_INPUT" }))
 
 	def input_files = ""
