@@ -5,14 +5,14 @@ nextflow.enable.dsl=2
 include { nevermore_main } from "./nevermore/workflows/nevermore"
 // include { gffquant_flow } from "./nevermore/workflows/gffquant"
 // include { fastq_input } from "./nevermore/workflows/input"
-include { metaT_input; metaG_input } from "./imp/workflows/input"
+include { metaT_input; metaG_input; assembly_prep } from "./multi/workflows/input"
 
 // include { rnaspades; metaspades } from "./imp/modules/assemblers/spades"
 // include { bwa_index } from "./imp/modules/alignment/indexing/bwa_index"
 // include { extract_unmapped } from "./imp/modules/alignment/extract"
 
 // include { metaT_assembly } from "./imp/workflows/meta_t"
-include { assembly_prep } from "./imp/workflows/input"
+// include { assembly_prep } from "./imp/workflows/input"
 // include { hybrid_megahit } from "./imp/modules/assemblers/megahit"
 // include { get_unmapped_reads } from "./imp/workflows/extract"
 // include { concatenate_contigs; filter_fastq } from "./imp/modules/assemblers/functions"
