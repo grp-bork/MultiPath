@@ -18,7 +18,7 @@ include { metaT_input; metaG_input; assembly_prep } from "./multi/workflows/inpu
 // include { concatenate_contigs; filter_fastq } from "./imp/modules/assemblers/functions"
 
 include { unicycler } from "./multi/modules/assembler/unicycler"
-
+include { prokka } from "./multi/modules/annotators/prokka"
 
 // if (params.input_dir && params.remote_input_dir) {
 // 	log.info """
