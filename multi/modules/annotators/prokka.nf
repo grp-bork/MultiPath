@@ -6,10 +6,18 @@ process prokka {
 	input:
 	tuple val(sample), path(genome_fasta)
 
+	output:
+	tuple val(sample), path("annotations/prokka/${sample.id}/${sample.id}.faa"), emit: proteins
+	tuple val(sample), path("annotations/prokka/${sample.id}/${sample.id}.ffn"), emit: genes
+	tuple val(sample), path("annotations/prokka/${sample.id}/${sample.id}.fna"), emit: genome
+	tuple val(sample), path("annotations/prokka/${sample.id}/${sample.id}.gff"), emit: gff
+
 	script:
 	"""
 	mkdir -p annotations/prokka/${sample.id}/
 	prokka --cpus ${task.cpus} --outdir prokka_out/ --prefix ${sample.id} --kingdom ${params.annotation.prokka.kingdom} --genus ${params.annotation.prokka.genus} ${genome_fasta}
+
+	mv -v prokka_out/* annotations/prokka/${sample.id}/
 	"""
 	
 }
