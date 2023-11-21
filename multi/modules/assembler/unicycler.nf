@@ -3,7 +3,8 @@ process unicycler {
 	input:
 	tuple val(sample), path(short_reads), path(long_reads)
 
-	// output:
+	output:
+	tuple val(sample), path("assemblies/unicycler/${sample.id}/${sample.id}.unicycler.fasta"), emit: assembly_fasta
 
 	script:
 
@@ -31,9 +32,10 @@ process unicycler {
 	}
 		
 	"""
-	mkdir -p assemblies/unicycler/${sample.id}/
+	mkdir -p assemblies/unicycler/${sample.id}/ unicycler_out/
 
-	unicycler -t ${task.cpus} -o assemblies/unicycler/${sample.id}/ ${input_files}
+	unicycler -t ${task.cpus} -o unicycler_out/ ${input_files}
+	mv -v unicycler_out/assembly.fasta assemblies/unicycler/${sample.id}/${sample.id}.unicycler.fasta
 	"""
 	
 

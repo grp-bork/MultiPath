@@ -92,6 +92,8 @@ workflow {
 
 	unicycler(metaG_assembly_ch)
 
+	prokka(unicycler.out.assembly_fasta)
+
 }
 
 
