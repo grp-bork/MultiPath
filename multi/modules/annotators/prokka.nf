@@ -8,7 +8,7 @@ process prokka {
 
 	script:
 	"""
-	mkdir -p annotations/prokka/${sample.id}/ prokka_out/
+	mkdir -p annotations/prokka/${sample.id}/
 	prokka --cpus ${task.cpus} --outdir prokka_out/ --prefix ${sample.id} --kingdom ${params.annotation.prokka.kingdom} --genus ${params.annotation.prokka.genus} ${genome_fasta}
 	"""
 	
