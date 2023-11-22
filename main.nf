@@ -95,6 +95,8 @@ workflow {
 
 	prokka(unicycler.out.assembly_fasta)
 
+	carveme(prokka.out.proteins)
+
 }
 
 
