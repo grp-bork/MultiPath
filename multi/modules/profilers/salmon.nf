@@ -1,4 +1,4 @@
-// params.profilers.salmon.index.k = 31
+params.profilers.salmon.index.k = 31
 
 process salmon_index {
 	input:
@@ -11,7 +11,7 @@ process salmon_index {
 	"""
 	mkdir -p salmon/index/${sample.id}/
 
-	salmon index -t ${genes} -i salmon/index/${sample.id}/${sample.id} -k ${params.profilers.index.salmon.k}
+	salmon index -t ${genes} -i salmon/index/${sample.id}/${sample.id} -k ${params.profilers.salmon.index.k}
 
 	"""
 	// > ./bin/salmon index -t transcripts.fa -i transcripts_index --decoys decoys.txt -k 31
