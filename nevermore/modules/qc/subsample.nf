@@ -2,8 +2,8 @@ process calculate_library_size_cutoff {
 	input:
 	path(readcounts)
 
-	out:
-	val(libsize_cutoff)
+	// out:
+	// val(libsize_cutoff)
 
 	script:
 	"""
