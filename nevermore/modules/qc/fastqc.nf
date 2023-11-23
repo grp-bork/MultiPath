@@ -25,12 +25,12 @@ process fastqc {
 	if (r1_files.size() != 0) {
         def r1_prefix = r1_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
 		fastqc_calls += "${fastqc_cmd} ${r1_files[0]}\n"
-        mv_calls += "mv fastqc/${r1_prefix}/fastqc_data.txt fastqc/${r1_prefix}/${r1_prefix}_fastqc_data.txt\n"
+        mv_calls += "mv fastqc/${r1_prefix}_fastqc/fastqc_data.txt fastqc/${r1_prefix}_fastqc/${r1_prefix}_fastqc_data.txt\n"
 	}
 	if (r2_files.size() != 0) {
         def r2_prefix = r2_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
 		fastqc_calls += "${fastqc_cmd} ${r2_files[0]}\n"
-        mv_calls += "mv fastqc/${r2_prefix}/fastqc_data.txt fastqc/${r2_prefix}/${r2_prefix}_fastqc_data.txt\n"
+        mv_calls += "mv fastqc/${r2_prefix}_fastqc/fastqc_data.txt fastqc/${r2_prefix}_fastqc/${r2_prefix}_fastqc_data.txt\n"
 	}
 	
     // ${fastqc_cmd} ${sample.id}_R1.fastq.${compression} && mv fastqc/${sample.id}_R1_fastqc/fastqc_data.txt fastqc/${sample.id}_R1_fastqc/${sample.id}_R1_fastqc_data.txt
