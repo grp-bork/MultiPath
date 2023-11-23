@@ -98,7 +98,7 @@ workflow {
 
 	carveme(
 		prokka.out.proteins,
-		(params.annotation.carveme.mediadb) ?: asset_dir + "/carveme/media_db.tsv"
+		(params.annotation.carveme.mediadb) ?: "${projectDir}/assets/carveme/media_db.tsv"
 	)
 
 	memote(carveme.out.model)
