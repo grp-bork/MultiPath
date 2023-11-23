@@ -124,7 +124,8 @@ workflow {
 			salmon_index.out.index
 				.map { sample, index ->
 					return tuple(sample.id.replaceAll(/\.metaG/, ""), index)
-				}	
+				},
+			by: 0
 		)		
 
 	metaT_quant_ch.dump(pretty: true, tag: "metaT_quant_ch")
