@@ -98,6 +98,8 @@ workflow {
 
 	carveme(prokka.out.proteins)
 
+	memote(carveme.out.model)
+
 }
 
 
