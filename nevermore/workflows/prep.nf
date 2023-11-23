@@ -7,6 +7,8 @@ include { qc_bbduk_stepwise_amplicon } from "../modules/qc/bbduk_amplicon"
 include { qc_bbmerge } from "../modules/qc/bbmerge"
 include { fastqc } from "../modules/qc/fastqc"
 include { multiqc } from "../modules/qc/multiqc"
+include { calculate_library_size_cutoff } from "../modules/qc/subsample"
+
 
 def merge_pairs = (params.merge_pairs || false)
 def keep_orphans = (params.keep_orphans || false)
@@ -55,6 +57,10 @@ workflow nevermore_simple_preprocessing {
 				subsample_ch = fastq_ch
 					.filter { params.subsample == "all" || it[0].library_source == params.subsample }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+
+				// calculate_library_size_cutoff(fastqc.out.counts.collect())
+
+
 			}
 
 
