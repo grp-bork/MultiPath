@@ -16,8 +16,8 @@ process fastqc {
 
     def fastqc_calls = ""
     def mv_calls = ""
-	def r1_files = fastqs.findAll( { it.name.endsWith("_R1.fastq.${compression}") } ) // && !it.name.matches("(.*)(singles|orphans|chimeras)(.*)") } )
-	def r2_files = fastqs.findAll( { it.name.endsWith("_R2.fastq.${compression}") } )
+	def r1_files = reads.findAll( { it.name.endsWith("_R1.fastq.${compression}") } ) // && !it.name.matches("(.*)(singles|orphans|chimeras)(.*)") } )
+	def r2_files = reads.findAll( { it.name.endsWith("_R2.fastq.${compression}") } )
 	// def orphans = fastqs.findAll( { it.name.matches("(.*)(singles|orphans|chimeras)(.*)") } )
 
     
