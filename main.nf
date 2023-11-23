@@ -96,7 +96,10 @@ workflow {
 
 	prokka(unicycler.out.assembly_fasta)
 
-	carveme(prokka.out.proteins)
+	carveme(
+		prokka.out.proteins,
+		(params.annotation.carveme.mediadb) ?: asset_dir + "/carveme/media_db.tsv"
+	)
 
 	memote(carveme.out.model)
 
