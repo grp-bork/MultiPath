@@ -34,7 +34,7 @@ process qc_bbduk {
         read1 += "in1=${r1_files[0]} out1=qc_reads/${sample.id}/${sample.id}_R1.fastq.gz"
         // read1 = "in1=${sample.id}_R1.fastq.${compression} out1=qc_reads/${sample.id}/${sample.id}_R1.fastq.gz"
         if (r2_files.size() != 0) {
-            read2 += "in2=${r1_files[0]} out2=qc_reads/${sample.id}/${sample.id}_R2.fastq.gz outs=tmp_orphans.fq"
+            read2 += "in2=${r2_files[0]} out2=qc_reads/${sample.id}/${sample.id}_R2.fastq.gz outs=tmp_orphans.fq"
             orphans += "qc_reads/${sample.id}/${sample.id}.orphans_R1.fastq.gz"
             orphan_filter += "bbduk.sh -Xmx${maxmem}g t=${task.cpus} ${trim_params} in=tmp_orphans.fq out=${orphans}"
             orphan_check = """
