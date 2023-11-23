@@ -115,12 +115,22 @@ workflow {
 		.map { sample_id, sample, short_reads -> 
 			def new_sample = [:]
 			new_sample.id = sample_id
+			new_sample.index_id = sample_id.replaceAll(/\.metaT/, "")
 			new_sample.library_source = "metaT"
 			new_sample.library = sample[0].library
-			return tuple(new_sample, [short_reads].flatten())
+			return tuple(new_sample.index_id, new_sample, [short_reads].flatten())
 		}
+		.combine(
+			salmon_index.out.index
+				.map { sample, index ->
+					return tuple(sample.id.replaceAll(/\.metaG/, ""), index)
+				}	
+		)		
 
 	metaT_quant_ch.dump(pretty: true, tag: "metaT_quant_ch")
+
+
+
 
 }
 

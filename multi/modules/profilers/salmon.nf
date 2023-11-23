@@ -5,13 +5,13 @@ process salmon_index {
 	tuple val(sample), path(genes)
 
 	output:
-	tuple val(sample), path("salmon/index/${sample.id}/${sample.id}*"), emit: index
+	tuple val(sample), path("salmon/index/${sample.id}"), emit: index
 
 	script:
 	"""
 	mkdir -p salmon/index/${sample.id}/
 
-	salmon index -t ${genes} -i salmon/index/${sample.id}/${sample.id} -k ${params.profilers.salmon.index.k}
+	salmon index -t ${genes} -i salmon/index/${sample.id}/ -k ${params.profilers.salmon.index.k}
 
 	"""
 	// > ./bin/salmon index -t transcripts.fa -i transcripts_index --decoys decoys.txt -k 31
