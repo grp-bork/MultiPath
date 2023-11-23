@@ -1,4 +1,4 @@
-params.profilers.salmon.index.k = 31
+// params.profilers.salmon.index.k = 31
 
 process salmon_index {
 	input:
