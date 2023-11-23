@@ -38,12 +38,13 @@ include { salmon_index; salmon_quant } from "./multi/modules/profilers/salmon"
 // each sample has at most 2 groups of files: [2 x PE, 1 x orphan], [1 x singles]
 
 
+
+
 def input_dir = (params.input_dir) ? params.input_dir : params.remote_input_dir
 
 params.remote_input_dir = false
 
-params.assembler = "megahit"
-
+params.run_qa = true
 
 workflow {
 
