@@ -38,15 +38,28 @@ workflow nevermore_simple_preprocessing {
 
 	main:
 		rawcounts_ch = Channel.empty()
-		if (params.run_qa) {
-			fastqc(fastq_ch, "raw")
+		if (params.run_qa || params.subsample) {
 
-			multiqc(
-				fastqc.out.stats.map { sample, report -> report }.collect(),
-				"${asset_dir}/multiqc.config",
-				"raw"
-			)
+			fastqc(fastq_ch, "raw")
 			rawcounts_ch = fastqc.out.counts
+
+			if (params.run_qa) {
+				multiqc(
+					fastqc.out.stats.map { sample, report -> report }.collect(),
+					"${asset_dir}/multiqc.config",
+					"raw"
+				)
+			}
+
+			if (params.subsample) {
+				subsample_ch = fastq_ch
+					.filter { params.subsample == "all" || it[0].library_source == params.subsample }
+				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+			}
+
+
+
+
 		}
 
 		processed_reads_ch = Channel.empty()
