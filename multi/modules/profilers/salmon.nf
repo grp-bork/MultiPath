@@ -21,7 +21,7 @@ process salmon_index {
 params.profilers.salmon.quant.libtype = "IU"
 
 process salmon_quant {
-	label "align"
+	// label "align"
 
 	input:
 	tuple val(sample), path(fastqs), path(salmon_index)
