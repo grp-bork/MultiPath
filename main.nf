@@ -126,8 +126,8 @@ workflow {
 					return tuple(sample.id.replaceAll(/\.metaG/, ""), index)
 				},
 			by: 0
-		.map { index_id, sample, reads, index -> return tuple(sample, reads, index)}
 		)		
+		.map { index_id, sample, reads, index -> return tuple(sample, reads, index)}
 
 	metaT_quant_ch.dump(pretty: true, tag: "metaT_quant_ch")
 
