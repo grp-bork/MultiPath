@@ -11,7 +11,7 @@ process memote {
 	"""
 	mkdir -p reports/memote/${sample.id}
 
-	memote --filename reports/memote/${sample.id}.html ${model}
+	memote report snapshot --filename reports/memote/${sample.id}.html ${model}
 	"""
 
 }
