@@ -21,6 +21,7 @@ include { unicycler } from "./multi/modules/assembler/unicycler"
 include { prokka } from "./multi/modules/annotators/prokka"
 include { carveme } from "./multi/modules/annotators/carveme"
 include { memote } from "./multi/modules/reports/memote"
+include { salmon_index } from "./multi/modules/profilers/salmon"
 
 // if (params.input_dir && params.remote_input_dir) {
 // 	log.info """
@@ -95,6 +96,8 @@ workflow {
 	unicycler(metaG_assembly_ch)
 
 	prokka(unicycler.out.assembly_fasta)
+
+	salmon_index(prokka.out.genes)
 
 	carveme(
 		prokka.out.proteins,
