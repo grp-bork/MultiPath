@@ -76,10 +76,11 @@ workflow {
 
 	assembly_prep(
 		nevermore_main.out.fastqs
-			.filter { it[0].library_source == "metaG" }
+			// .filter { it[0].library_source == "metaG" }
 	)
 
 	metaG_assembly_ch = assembly_prep.out.reads
+		.filter { it[0].library_source == "metaG" }
 		.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
 		.groupTuple(by: 0, size: 2, remainder: true)
 		.map { sample_id, sample, short_reads -> 
@@ -98,13 +99,28 @@ workflow {
 	prokka(unicycler.out.assembly_fasta)
 
 	salmon_index(prokka.out.genes)
+	salmon_index.out.index.dump(pretty: true, tag: "salmon_index.out.index")
 
 	carveme(
 		prokka.out.proteins,
-		(params.annotation.carveme.mediadb) ?: "${projectDir}/assets/carveme/media_db.tsv"
+		(params.annotation.carveme.media_db) ?: "${projectDir}/assets/carveme/media_db.tsv"
 	)
 
 	memote(carveme.out.model)
+
+	metaT_quant_ch = assembly_prep.out.reads
+		.filter { it[0].library_source == "metaT" }
+		.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
+		.groupTuple(by: 0, size: 2, remainder: true)
+		.map { sample_id, sample, short_reads -> 
+			def new_sample = [:]
+			new_sample.id = sample_id
+			new_sample.library_source = "metaT"
+			new_sample.library = sample[0].library
+			return tuple(new_sample, [short_reads].flatten())
+		}
+
+	metaT_quant_ch.dump(pretty: true, tag: "metaT_quant_ch")
 
 }
 

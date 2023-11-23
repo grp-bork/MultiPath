@@ -1,6 +1,6 @@
 params.annotation.carveme.solver = "scip"
 params.annotation.carveme.gapfill_model = "M3"
-params.annotation.carveme.mediadb = ""
+params.annotation.carveme.media_db = ""
 
 
 process carveme {
