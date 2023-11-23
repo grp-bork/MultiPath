@@ -85,12 +85,11 @@ workflow {
 		.groupTuple(by: 0, size: 2, remainder: true)
 		.map { sample_id, sample, short_reads -> 
 			def new_sample = [:]
-			new_sample.id = sample_id
+			new_sample.id = sample_id.replaceAll(/\.metaG/, "")
 			new_sample.library_source = "metaG"
 			new_sample.library = sample[0].library
 			return tuple(new_sample, [short_reads].flatten(), [empty_file])
 		}
-
 
 	metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
 
