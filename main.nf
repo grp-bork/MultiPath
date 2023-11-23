@@ -20,6 +20,7 @@ include { metaT_input; metaG_input; assembly_prep } from "./multi/workflows/inpu
 include { unicycler } from "./multi/modules/assembler/unicycler"
 include { prokka } from "./multi/modules/annotators/prokka"
 include { carveme } from "./multi/modules/annotators/carveme"
+include { memote } from "./multi/modules/reports/memote"
 
 // if (params.input_dir && params.remote_input_dir) {
 // 	log.info """
