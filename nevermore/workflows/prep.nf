@@ -53,15 +53,16 @@ workflow nevermore_simple_preprocessing {
 				)
 			}
 
-			if (params.subsample) {
+			if (params.subsample.set) {
 				subsample_ch = fastq_ch
-					.filter { params.subsample == "all" || it[0].library_source == params.subsample }
+					.filter { params.subsample.set == "all" || it[0].library_source == params.subsample.set }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
 				calculate_library_size_cutoff(
 					fastqc.out.counts
 						.map { sample, counts -> return counts }
-						.collect()
+						.collect(),
+					params.subsample.percentile
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
 
