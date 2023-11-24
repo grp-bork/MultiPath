@@ -46,6 +46,7 @@ process subsample_reads {
 
 	output:
 	tuple val(sample), path("subsampled/${sample.id}/*fastq.gz"), emit: subsampled_reads
+	tuple val(sample), path("SUBSAMPLE.ok")
 
 	script:
 
@@ -66,9 +67,12 @@ process subsample_reads {
 	}
 
 	"""
+	set -e -o pipefail
 	mkdir -p subsampled/${sample.id}/
 
 	${seqtk_calls}
+
+	touch SUBSAMPLE.ok
 	"""
 
 
