@@ -87,7 +87,7 @@ workflow nevermore_simple_preprocessing {
 							remainder: true						
 					)
 					.branch {
-						subsample: it[2] == 1
+						subsample: it[2] == "1"
 						no_subsample: true
 					}
 					.set { subsample_ch }
