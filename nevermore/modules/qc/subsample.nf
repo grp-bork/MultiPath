@@ -20,7 +20,7 @@ process calculate_library_size_cutoff {
 			for f in glob.glob("*.raw.txt")),
 			key=lambda x:x[1]
 		)
-	}
+	)
 
 	percentiles = stats.quantiles(d.values(), n=100)
 	mean_low_counts = stats.mean(v for v in d.values() if v < percentiles[percentile - 1])
