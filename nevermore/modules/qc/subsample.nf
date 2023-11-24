@@ -1,3 +1,5 @@
+params.subsample.random_seed = 313
+
 process calculate_library_size_cutoff {
 	input:
 	path(readcounts)
@@ -36,6 +38,39 @@ process calculate_library_size_cutoff {
 	// nlibs=\$(cat ${readcounts} | wc -l)
 	// cat ${readcounts} | sort -k1,1g | awk -v nlibs=\$nlibs 'BEGIN {q75=int(nlibs*0.75 + 0.5)} NR<q75 {print;}' | awk '{sum+=\$1} END {printf("%d\\n", sum/NR) }'
 	// cat ${readcounts} | sort -k1,1g | awk -v nlibs=\$nlibs 'BEGIN {q75=int(nlibs*0.75 + 0.5)} NR<q75 {sum+=$1; n+=1;} END {printf("%d\n",sum/n) }'
+}
+
+process subsample_reads {
+	input:
+	tuple val(sample), path(fastqs), val(target_size)
+
+	output:
+	tuple val(sample), path("subsampled/${sample.id}/*fastq.gz"), emit: subsampled_reads
+
+	script:
+
+	def compression = (reads[0].name.endsWith(".gz")) ? "gz" : "bz2"
+	def decomp = (compression == "gz") ? "gzip" : "bzip2"
+	def seqtk_calls = ""
+	def r1_files = fastqs.findAll( { it.name.endsWith("_R1.fastq.${compression}") } )
+	def r2_files = fastqs.findAll( { it.name.endsWith("_R2.fastq.${compression}") } )
+	    
+
+	if (r1_files.size() != 0) {
+        def r1_prefix = r1_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
+		seqtk_calls += "${decomp} -dc ${r1_files[0]} | seqtk sample -s ${params.subsample.random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R1.fastq.gz\n"		
+	}
+	if (r2_files.size() != 0) {
+        def r2_prefix = r2_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
+		seqtk_calls += "${decomp} -dc ${r2_files[0]} | seqtk sample -s ${params.subsample.random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R2.fastq.gz\n"
+	}
+
+	"""
+	mkdir -p subsampled/${sample.id}/
+
+	${seqtk_calls}
+	"""
 
 
 }
+
