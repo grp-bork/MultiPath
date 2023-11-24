@@ -69,7 +69,7 @@ workflow {
 	nevermore_main(nvm_input_ch)
 
 
-	empty_file = file("${launchDir}/NO_INPUT")
+	empty_file = file("${workDir}/NO_INPUT")
 	empty_file.text = "NOTHING TO SEE HERE."
 	print empty_file
 

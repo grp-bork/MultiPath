@@ -63,7 +63,7 @@ workflow nevermore_simple_preprocessing {
 						.map { sample, counts -> return counts }
 						.collect()
 				)
-				calculate_library_size_cutoff.out.libsize_cutoff.view()
+				calculate_library_size_cutoff.out.library_sizes.view()
 
 
 			}
