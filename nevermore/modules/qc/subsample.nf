@@ -21,7 +21,7 @@ process calculate_library_size_cutoff {
 			key=lambda x:x[1]
 		)
 	)
-
+	percentile = ${percentile}
 	percentiles = statistics.quantiles(d.values(), n=100)
 	mean_low_counts = statistics.mean(v for v in d.values() if v < percentiles[percentile - 1])
 
