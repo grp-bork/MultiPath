@@ -91,7 +91,7 @@ workflow nevermore_simple_preprocessing {
 
 
 				subsample_ch = css_ch
-					.filter { it[3] == true }
+					.filter { it[3] }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
 
