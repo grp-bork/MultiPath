@@ -96,7 +96,7 @@ workflow nevermore_simple_preprocessing {
 					.set { subsample_ch }
 				
 				subsample_ch.subsample.dump(pretty: true, tag: "subsample_ch")
-					
+				subsample_ch.no_subsample.dump(pretty: true, tag: "no_subsample_ch")	
 
 				
 				
