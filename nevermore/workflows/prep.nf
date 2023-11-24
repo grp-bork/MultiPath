@@ -53,9 +53,9 @@ workflow nevermore_simple_preprocessing {
 				)
 			}
 
-			if (params.subsample.set) {
+			if (params.subsample.subset) {
 				subsample_ch = fastq_ch
-					.filter { params.subsample.set == "all" || it[0].library_source == params.subsample.set }
+					.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
 				calculate_library_size_cutoff(
