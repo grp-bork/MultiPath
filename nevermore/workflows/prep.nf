@@ -94,6 +94,10 @@ workflow nevermore_simple_preprocessing {
 					.filter { it[3] }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
+				do_not_subsample_ch = css_ch
+					.filter { !it[3] }
+				do_not_subsample_ch.dump(pretty: true, tag: "do_not_subsample_ch")
+
 
 				// css_ch
 				// 	.branch {
