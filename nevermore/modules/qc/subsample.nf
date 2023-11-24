@@ -25,7 +25,7 @@ process calculate_library_size_cutoff {
 	percentiles = statistics.quantiles(d.values(), n=100)
 	mean_low_counts = statistics.mean(v for v in d.values() if v < percentiles[percentile - 1])
 
-	with open('library_sizes.txt', 'rt') as _out:
+	with open('library_sizes.txt', 'wt') as _out:
 		for k, v in d.items():
 			print(k, v, int(v < percentiles[percentile - 1]), sep='\\t', file=_out)
 
