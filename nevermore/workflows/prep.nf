@@ -90,7 +90,7 @@ workflow nevermore_simple_preprocessing {
 				css_ch.dump(pretty: true, tag: "css_ch")
 				css_ch
 					.branch {
-						subsample: it[3]
+						subsample: it[3] == true
 						no_subsample: true
 					}
 					.set { subsample_ch }
