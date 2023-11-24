@@ -81,7 +81,7 @@ workflow nevermore_simple_preprocessing {
 						calculate_library_size_cutoff.out.library_sizes
 							.splitCsv(header: true, sep: '\t', strip: true)
 							.map { row ->
-								return tuple(row.sample, row.do_subsample.toInteger(), row.target_size)
+								return tuple(row.sample, row.do_subsample, row.target_size)
 							},
 							by: 0,
 							remainder: true						
@@ -90,7 +90,7 @@ workflow nevermore_simple_preprocessing {
 				css_ch.dump(pretty: true, tag: "css_ch")
 				css_ch
 					.branch {
-						subsample: it[3] == 1
+						subsample: it[3].toInteger() == 1
 						no_subsample: true
 					}
 					.set { subsample_ch }
