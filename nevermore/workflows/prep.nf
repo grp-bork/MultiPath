@@ -60,6 +60,7 @@ workflow nevermore_simple_preprocessing {
 
 				calculate_library_size_cutoff(
 					fastqc.out.counts
+						.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 						.map { sample, counts -> return counts }
 						.collect(),
 					params.subsample.percentile

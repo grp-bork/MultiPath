@@ -68,6 +68,7 @@ workflow {
 
 	nevermore_main(nvm_input_ch)
 
+	if (!params.test_subsampling) {
 
 	empty_file = file("${workDir}/NO_INPUT")
 	empty_file.text = "NOTHING TO SEE HERE."
@@ -134,5 +135,6 @@ workflow {
 	salmon_quant(metaT_quant_ch)
 	salmon_quant.out.quant.dump(pretty: true, tag: "salmon_quant.out.quant")
 
+	}
 
 }

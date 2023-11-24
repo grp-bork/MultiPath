@@ -29,6 +29,8 @@ process calculate_library_size_cutoff {
 		for k, v in d.items():
 			print(k, v, int(v < percentiles[percentile - 1]), sep='\\t', file=_out)
 
+	print(mean_low_counts)
+
 	"""
 	// nlibs=\$(cat ${readcounts} | wc -l)
 	// cat ${readcounts} | sort -k1,1g | awk -v nlibs=\$nlibs 'BEGIN {q75=int(nlibs*0.75 + 0.5)} NR<q75 {print;}' | awk '{sum+=\$1} END {printf("%d\\n", sum/NR) }'
