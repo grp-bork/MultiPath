@@ -49,7 +49,7 @@ process subsample_reads {
 
 	script:
 
-	def compression = (reads[0].name.endsWith(".gz")) ? "gz" : "bz2"
+	def compression = (fastqs[0].name.endsWith(".gz")) ? "gz" : "bz2"
 	def decomp = (compression == "gz") ? "gzip" : "bzip2"
 	def seqtk_calls = ""
 	def r1_files = fastqs.findAll( { it.name.endsWith("_R1.fastq.${compression}") } )
