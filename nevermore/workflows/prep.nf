@@ -88,15 +88,22 @@ workflow nevermore_simple_preprocessing {
 					)
 
 				css_ch.dump(pretty: true, tag: "css_ch")
-				css_ch
-					.branch {
-						subsample: it[3] == true
-						no_subsample: true
-					}
-					.set { subsample_ch }
+
+
+				subsample_ch = css_ch
+					.filter { it[3] }
+				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+
+
+				// css_ch
+				// 	.branch {
+				// 		subsample: it[3] == true
+				// 		no_subsample: true
+				// 	}
+				// 	.set { subsample_ch }
 				
-				subsample_ch.subsample.dump(pretty: true, tag: "subsample_ch")
-				subsample_ch.no_subsample.dump(pretty: true, tag: "no_subsample_ch")	
+				// subsample_ch.subsample.dump(pretty: true, tag: "subsample_ch")
+				// subsample_ch.no_subsample.dump(pretty: true, tag: "no_subsample_ch")	
 
 				
 				
