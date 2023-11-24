@@ -74,7 +74,7 @@ workflow nevermore_simple_preprocessing {
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
 
-				check_subsample_ch
+				check_subsample_ch.subsample
 					.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
 					.join(
 						
