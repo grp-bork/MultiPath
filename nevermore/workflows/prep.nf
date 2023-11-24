@@ -81,7 +81,7 @@ workflow nevermore_simple_preprocessing {
 						calculate_library_size_cutoff.out.library_sizes
 							.splitCsv(header: true, sep: '\t', strip: true)
 							.map { row ->
-								return tuple(row.sample, row.do_subsample, row.target_size)
+								return tuple(row.sample, row.do_subsample == "1", row.target_size)
 							},
 							by: 0,
 							remainder: true						
