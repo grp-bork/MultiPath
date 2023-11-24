@@ -90,12 +90,19 @@ workflow nevermore_simple_preprocessing {
 				css_ch.dump(pretty: true, tag: "css_ch")
 
 
+				// for some reason, .branch does not work here :S
 				subsample_ch = css_ch
 					.filter { it[3] }
 				subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
 				do_not_subsample_ch = css_ch
 					.filter { !it[3] }
+					.map { sample_id, sample, fastqs, do_subsample, target_size ->
+						return tuple(sample, fastqs)
+					}
+					.concat(
+						check_subsample_ch.no_subsample
+					)
 				do_not_subsample_ch.dump(pretty: true, tag: "do_not_subsample_ch")
 
 
