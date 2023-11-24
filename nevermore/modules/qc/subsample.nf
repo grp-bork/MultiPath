@@ -28,7 +28,7 @@ process calculate_library_size_cutoff {
 	with open('library_sizes.txt', 'wt') as _out:
 		print(*('sample', 'size', 'do_subsample', 'target_size'), sep='\\t', file=_out)
 		for k, v in d.items():
-			print(k, v, int(v < percentiles[percentile - 1]), int(mean_low_counts + 0.5), sep='\\t', file=_out)
+			print(k, v, int(not v < percentiles[percentile - 1]), int(mean_low_counts + 0.5), sep='\\t', file=_out)
 
 	print(mean_low_counts)
 

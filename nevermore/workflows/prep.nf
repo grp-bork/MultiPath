@@ -74,7 +74,7 @@ workflow nevermore_simple_preprocessing {
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
 
-				subsample_ch = check_subsample_ch.subsample
+				check_subsample_ch
 					.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
 					.join(
 						
@@ -86,7 +86,13 @@ workflow nevermore_simple_preprocessing {
 							by: 0,
 							remainder: true						
 					)
-				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+					.branch {
+						subsample: it[3] == 1
+						no_subsample: true
+					}
+					.set { subsample_ch }
+				
+				subsample_ch.subsample.dump(pretty: true, tag: "subsample_ch")
 					
 
 				
