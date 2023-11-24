@@ -54,9 +54,9 @@ workflow nevermore_simple_preprocessing {
 			}
 
 			if (params.subsample.subset) {
-				subsample_ch = fastq_ch
-					.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
-				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+				// subsample_ch = fastq_ch
+				// 	.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
+				// subsample_ch.dump(pretty: true, tag: "subsample_ch")
 
 				calculate_library_size_cutoff(
 					fastqc.out.counts
@@ -66,6 +66,24 @@ workflow nevermore_simple_preprocessing {
 					params.subsample.percentile
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
+
+				subsample_ch = fastq_ch
+					.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
+					.join(
+						
+						calculate_library_size_cutoff.out.library_sizes
+							.splitCsv(header: true, sep: '\t', strip: true)
+							.map { row ->
+								return tuple(row.sample, row.do_subsample, row.target_size)
+							},
+							by: 0,
+							remainder: true						
+					)
+				subsample_ch.dump(pretty: true, tag: "subsample_ch")
+					
+
+				
+				
 
 
 			}
