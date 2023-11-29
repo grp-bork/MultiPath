@@ -74,7 +74,7 @@ workflow {
 			// return tuple(new_sample, [short_reads].flatten(), [empty_file])
 			return tuple(new_sample.id, new_sample, [short_reads].flatten())
 		}
-		.join(long_reads_ch, by: 1, remainder: true)
+		.join(long_reads_ch, by: 0, remainder: true)
 		.map { sample_id, sample, short_reads, long_reads ->
 			return tuple(sample, short_reads, [long_reads ?= empty_file])
 		}
