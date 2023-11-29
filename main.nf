@@ -54,11 +54,12 @@ workflow {
 			.groupTuple(by: 0)
 		long_reads_ch.dump(pretty: true, tag: "long_reads_ch")
 
-	} else {
-		empty_file = file("${workDir}/NO_INPUT")
-		empty_file.text = "NOTHING TO SEE HERE."
-		long_reads_ch = Channel.of(empty_file)
-	}
+	} // else {
+
+	empty_file = file("${workDir}/NO_INPUT")
+	empty_file.text = "NOTHING TO SEE HERE."
+		// long_reads_ch = Channel.of(empty_file)
+	// }
 
 	// get the WGS reads for genome assembly
 	metaG_assembly_ch = assembly_prep.out.reads
@@ -70,8 +71,14 @@ workflow {
 			new_sample.id = sample_id.replaceAll(/\.metaG/, "")
 			new_sample.library_source = "metaG"
 			new_sample.library = sample[0].library
-			return tuple(new_sample, [short_reads].flatten(), [empty_file])
+			// return tuple(new_sample, [short_reads].flatten(), [empty_file])
+			return tuple(new_sample.id, new_sample, [short_reads].flatten())
 		}
+		.join(long_reads_ch, by: 1, remainder: true)
+		.map { sample_id, sample, short_reads, long_reads ->
+			return tuple(sample, short_reads, [long_reads ?= empty_file])
+		}
+
 	metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
 
 	// run genome assembly
