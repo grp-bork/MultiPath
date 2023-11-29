@@ -46,10 +46,8 @@ workflow {
 	long_reads_ch = Channel.empty()
 	if (params.long_reads_input_dir) {
 		long_reads_ch = Channel.fromPath(params.long_reads_input_dir + "/**.{fq.gz,fastq.gz}")
-			.map { file -> 
-				def meta = [:]
-				meta.id = file.getParent().getName()
-				return tuple(meta, file)
+			.map { file ->
+				return tuple(file.getParent().getName(), file)
 			}
 			.groupTuple(by: 0)
 		long_reads_ch.dump(pretty: true, tag: "long_reads_ch")
