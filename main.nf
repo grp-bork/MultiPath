@@ -55,9 +55,9 @@ workflow {
 		long_reads_ch.dump(pretty: true, tag: "long_reads_ch")
 
 	} else {
-		long_reads_ch = Channel.of(empty_file)
 		empty_file = file("${workDir}/NO_INPUT")
 		empty_file.text = "NOTHING TO SEE HERE."
+		long_reads_ch = Channel.of(empty_file)
 	}
 
 	// get the WGS reads for genome assembly
