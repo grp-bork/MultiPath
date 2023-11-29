@@ -73,11 +73,9 @@ workflow {
 			return tuple(new_sample.id, new_sample, [short_reads].flatten())
 		}
 		.join(long_reads_ch, by: 0, remainder: true)
-	metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
-
-	// 	.map { sample_id, sample, short_reads, long_reads ->
-	// 		return tuple(sample, short_reads, [long_reads ?= empty_file])
-	// 	}
+		.map { sample_id, sample, short_reads, long_reads ->
+			return tuple(sample, short_reads, [long_reads ?= empty_file])
+		}
 
 	// metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
 
