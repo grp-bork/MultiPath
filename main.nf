@@ -77,7 +77,7 @@ workflow {
 			return tuple(sample, short_reads, [long_reads ?= empty_file])
 		}
 
-	// metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
+	metaG_assembly_ch.dump(pretty: true, tag: "metaG_hybrid_input")
 
 	// run genome assembly
 	unicycler(metaG_assembly_ch)
