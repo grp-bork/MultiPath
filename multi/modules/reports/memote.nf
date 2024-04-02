@@ -1,4 +1,5 @@
 process memote {
+	container "docker://quay.io/biocontainers/memote:0.17.0--pyhdfd78af_0"
 
 	input:
 	tuple val(sample), path(model)

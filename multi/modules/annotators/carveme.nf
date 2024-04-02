@@ -4,6 +4,8 @@ params.annotation.carveme.media_db = ""
 
 
 process carveme {
+	container "oras://ghcr.io/cschu/container-forge:carveme" // TODO! docker
+
 	input:
 	tuple val(sample), path(proteins)
 	path(mediadb)

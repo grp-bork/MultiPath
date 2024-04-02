@@ -6,7 +6,7 @@ include { nevermore_main } from "./nevermore/workflows/nevermore"
 include { metaT_input; metaG_input; assembly_prep } from "./multi/workflows/input"
 
 include { unicycler } from "./multi/modules/assembler/unicycler"
-include { prokka } from "./multi/modules/annotators/prokka"
+include { prodigal } from "./multi/modules/annotators/prodigal"
 include { carveme } from "./multi/modules/annotators/carveme"
 include { memote } from "./multi/modules/reports/memote"
 include { salmon_index; salmon_quant } from "./multi/modules/profilers/salmon"
@@ -83,15 +83,15 @@ workflow {
 	unicycler(metaG_assembly_ch)
 
 	// annotate genome
-	prokka(unicycler.out.assembly_fasta)
+	prodigal(unicycler.out.assembly_fasta)
 
 	// generate salmon index from annotated genes
-	salmon_index(prokka.out.genes)
+	salmon_index(prodigal.out.genes)
 	salmon_index.out.index.dump(pretty: true, tag: "salmon_index.out.index")
 
 	// metabolic network reconstruction from proteins
 	carveme(
-		prokka.out.proteins,
+		prodigal.out.proteins,
 		(params.annotation.carveme.media_db) ?: "${projectDir}/assets/carveme/media_db.tsv"
 	)
 

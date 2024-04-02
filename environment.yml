@@ -1,8 +1,8 @@
-name: imp
+name: nevermore_multi
 channels:
  - bioconda
  - conda-forge
  - defaults
 dependencies:
  - python>=3.7
- - nextflow>=21.10.4
+ - nextflow>=22.10.6

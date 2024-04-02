@@ -2,6 +2,7 @@ params.annotation.prokka.kingdom = "Bacteria"
 params.annotation.prokka.genus = "Genus"
 
 process prokka {
+	container "docker://quay.io/biocontainers/prokka:1.14.6--pl5321hdfd78af_5"
 
 	input:
 	tuple val(sample), path(genome_fasta)
