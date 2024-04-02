@@ -52,12 +52,13 @@ workflow {
 			.groupTuple(by: 0)
 		long_reads_ch.dump(pretty: true, tag: "long_reads_ch")
 
-	} // else {
+	} else {
 
-	empty_file = file("${workDir}/NO_INPUT")
-	empty_file.text = "NOTHING TO SEE HERE."
-		// long_reads_ch = Channel.of(empty_file)
-	// }
+		empty_file = file("${workDir}/NO_INPUT")
+		empty_file.text = "NOTHING TO SEE HERE."
+		long_reads_ch = Channel.of(empty_file)
+
+	}
 
 	// get the WGS reads for genome assembly
 	metaG_assembly_ch = assembly_prep.out.reads
