@@ -5,9 +5,9 @@ process prodigal {
 	tuple val(sample), path(genome_fasta)
 
 	output:
-	tuple val(sample), path("${sample.id}/${sample.id}.faa"), emit: proteins
-	tuple val(sample), path("${sample.id}/${sample.id}.ffn"), emit: genes
-	tuple val(sample), path("${sample.id}/${sample.id}.gff"), emit: genome_annotation
+	tuple val(sample), path("annotations/prodigal/${sample.id}/${sample.id}.faa"), emit: proteins
+	tuple val(sample), path("annotations/prodigal/${sample.id}/${sample.id}.ffn"), emit: genes
+	tuple val(sample), path("annotations/prodigal/${sample.id}/${sample.id}.gff"), emit: genome_annotation
 
 	script:
 	def gunzip_cmd = (genome_fasta.name.endsWith(".gz")) ? "gzip -dc ${genome_fasta} > \$(basename ${genome_fasta} .gz)" : ""
