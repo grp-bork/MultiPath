@@ -5,4 +5,4 @@ channels:
  - defaults
 dependencies:
  - python>=3.7
- - nextflow>=22.10.6
+ - nextflow<23
