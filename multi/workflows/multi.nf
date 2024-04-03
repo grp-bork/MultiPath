@@ -28,7 +28,7 @@ workflow multi_main {
 
 			empty_file = file("${workDir}/NO_INPUT")
 			empty_file.text = "NOTHING TO SEE HERE."
-			long_reads_ch = Channel.of(empty_file)
+			// long_reads_ch = Channel.of(empty_file)
 
 		}
 
