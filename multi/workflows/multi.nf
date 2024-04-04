@@ -71,15 +71,24 @@ workflow multi_main {
 		// benchmarking metabolic network model
 		memote(carveme.out.model)
 
+		// this is from protoflow
+		// salmon_quant_ch = nevermore_main.output.fastqs
+		// 	.map { sample, files -> return tuple(sample.id.replaceAll(/\.meta[GT](\.singles)?$/, ""), sample.clone(), [files].flatten()) }
+		// 	.combine(salmon_index.out.index.map { sample, files -> return tuple(sample.id, files) }, by: 0)
+		// 	.map { sample_id, sample, fastqs, index ->
+		// 		return tuple(sample.clone(), fastqs, index)
+		// 	}
+
 		// get the RNAseq reads ready for gene quantification
-		metaT_quant_ch = assembly_prep.out.reads
+		// metaT_quant_ch = assembly_prep.out.reads
+		metaT_quant_ch = fastq_ch
 			.filter { it[0].library_source == "metaT" }
 			.map { sample, fastqs -> return tuple(sample.id, sample, fastqs) }
-			.groupTuple(by: 0, size: 2, remainder: true)
+			// .groupTuple(by: 0, size: 2, remainder: true)
 			.map { sample_id, sample, short_reads -> 
 				def new_sample = [:]
 				new_sample.id = sample_id
-				new_sample.index_id = sample_id.replaceAll(/\.metaT/, "")
+				new_sample.index_id = sample_id.replaceAll(/\.metaT(\.(singles|orphans|chimeras))?/, "")
 				new_sample.library_source = "metaT"
 				new_sample.library = sample[0].library
 				return tuple(new_sample.index_id, new_sample, [short_reads].flatten())
