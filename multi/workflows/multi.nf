@@ -90,7 +90,8 @@ workflow multi_main {
 				new_sample.id = sample_id
 				new_sample.index_id = sample_id.replaceAll(/\.metaT(\.(singles|orphans|chimeras))?/, "")
 				new_sample.library_source = "metaT"
-				new_sample.library = sample[0].library
+				// new_sample.library = sample[0].library
+				new_sample.library = sample.library
 				return tuple(new_sample.index_id, new_sample, [short_reads].flatten())
 			}
 			.combine(
