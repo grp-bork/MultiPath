@@ -20,7 +20,7 @@ workflow {
 	// input short reads
 	nvm_input_ch = Channel.empty()
 	metaT_ch = Channel.empty()
-	if (params.metaT_input_dir) {
+	if (params.meta_t_input) {
 		metaT_input(
 			Channel.fromPath(params.metaT_input_dir + "/*", type: "dir")
 		)
@@ -28,7 +28,7 @@ workflow {
 		nvm_input_ch = nvm_input_ch.concat(metaT_ch)
 	}
 	metaG_ch = Channel.empty()
-	if (params.metaG_input_dir) {
+	if (params.meta_g_input) {
 		metaG_input(
 			Channel.fromPath(params.metaG_input_dir + "/*", type: "dir")
 		)
