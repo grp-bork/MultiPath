@@ -1,3 +1,6 @@
+params.profilers = [:]
+params.profilers.salmon = [:]
+params.profilers.salmon.index = [:]
 params.profilers.salmon.index.k = 31
 
 process salmon_index {	
@@ -21,6 +24,7 @@ process salmon_index {
 
 }
 
+params.profilers.salmon.quant = [:]
 params.profilers.salmon.quant.libtype = "IU"
 
 process salmon_quant {

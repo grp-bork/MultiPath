@@ -44,9 +44,6 @@
           "type": "boolean",
           "default": true
         },
-        "run_qa": {
-          "type": "boolean"
-        },
         "run_sortmerna": {
           "type": "boolean"
         },
@@ -94,13 +91,11 @@
       "properties": {
         "subsample_percentile": {
           "type": "integer",
-          "default": 100,
-          "hidden": true
+          "default": 100
         },
         "subsample_random_seed": {
           "type": "integer",
-          "default": 313,
-          "hidden": true
+          "default": 313
         }
       }
     }
@@ -115,5 +110,11 @@
     {
       "$ref": "#/definitions/rnaseq_downsampling"
     }
-  ]
+  ],
+  "properties": {
+    "run_qa": {
+      "type": "string",
+      "default": "None"
+    }
+  }
 }
