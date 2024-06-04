@@ -65,7 +65,8 @@ workflow nevermore_simple_preprocessing {
 					}
 					.set { check_subsample_ch }
 
-				check_subsample_ch.dump(pretty: true, tag: "check_subsample_ch")
+				check_subsample_ch.subsample.dump(pretty: true, tag: "check_subsample_ch")
+				check_subsample_ch.no_subsample.dump(pretty: true, tag: "check_no_subsample_ch")
 				// subsample_ch = fastq_ch
 				// 	.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 				// subsample_ch.dump(pretty: true, tag: "subsample_ch")
