@@ -13,14 +13,17 @@
       "properties": {
         "dna_input": {
           "type": "string",
+          "format": "directory-path",
           "description": "Directory path to WGS files"
         },
         "rna_input": {
           "type": "string",
+          "format": "directory-path",
           "description": "Directory path to RNAseq files"
         },
         "long_reads_input": {
           "type": "string",
+          "format": "directory-path",
           "description": "Directory path to long read files"
         },
         "output_dir": {
