@@ -65,7 +65,7 @@ workflow multi_main {
 		// metabolic network reconstruction from proteins
 		carveme(
 			prodigal.out.proteins,
-			(params.annotation.carveme.media_db) ?: "${projectDir}/assets/carveme/media_db.tsv"
+			"${projectDir}/assets/carveme/media_db.tsv"
 		)
 
 		// benchmarking metabolic network model
