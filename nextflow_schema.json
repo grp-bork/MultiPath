@@ -1,160 +1,116 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/cschu/nevermore_imp/main/nextflow_schema.json",
-    "title": "Nextflow pipeline parameters",
-    "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
-    "type": "object",
-    "definitions": {
-        "metat_downsampling": {
-            "title": "metat_downsampling",
-            "type": "object",
-            "description": "",
-            "default": "",
-            "properties": {
-                "percentile": {
-                    "type": "integer",
-                    "description": "Subsample down to N%",
-                    "default": 75
-                },
-                "random_seed": {
-                    "type": "integer",
-                    "default": 313,
-                    "hidden": true
-                },
-                "subset": {
-                    "type": "string",
-                    "hidden": true,
-                    "default": "metaT"
-                }
-            },
-            "required": [
-                "random_seed",
-                "subset"
-            ]
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/cschu/nevermore_imp/main/nextflow_schema.json",
+  "title": "Nextflow pipeline parameters",
+  "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
+  "type": "object",
+  "definitions": {
+    "required": {
+      "title": "Required",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "dna_input": {
+          "type": "string",
+          "description": "Directory path to WGS files"
         },
-        "preprocessing": {
-            "title": "preprocessing",
-            "type": "object",
-            "description": "Preprocessing parameters",
-            "default": "",
-            "properties": {
-                "qc_minlen": {
-                    "type": "integer",
-                    "description": "Minimum read length to pass quality control",
-                    "default": 45
-                },
-                "qc_params_shotgun": {
-                    "type": "string",
-                    "description": "bbduk quality control parameters",
-                    "default": "qtrim=rl trimq=3 maq=25 ktrim=r k=23 mink=11 hdist=1 ftm=5 entropy=0.5 entropywindow=50 entropyk=5 tpe tbo"
-                },
-                "remove_host_kraken2_db": {
-                    "type": "boolean",
-                    "description": "Path to a kraken2 database"
-                },
-                "sortmerna_db": {
-                    "type": "boolean",
-                    "description": "Path to a sortmerna database"
-                }
-            },
-            "required": [
-                "qc_minlen",
-                "qc_params_shotgun",
-                "remove_host_kraken2_db",
-                "sortmerna_db"
-            ]
+        "rna_input": {
+          "type": "string",
+          "description": "Directory path to RNAseq files"
         },
-        "assembly": {
-            "title": "assembly",
-            "type": "object",
-            "description": "Assembler configuration",
-            "default": "",
-            "properties": {
-                "assembler": {
-                    "type": "string",
-                    "description": "Which assembler to use",
-                    "enum": [
-                        "megahit"
-                    ],
-                    "default": "megahit"
-                },
-                "kmer_steps": {
-                    "type": "string",
-                    "description": "A comma-separated list of k-mer sizes for the assembler",
-                    "default": "25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93,97"
-                }
-            },
-            "required": [
-                "assembler",
-                "kmer_steps"
-            ]
+        "long_reads_input": {
+          "type": "string",
+          "description": "Directory path to long read files"
         },
-        "required": {
-            "title": "Required",
-            "type": "object",
-            "description": "",
-            "default": "",
-            "properties": {
-                "meta_g_input": {
-                    "type": "string",
-                    "description": "Directory path to meta_g files",
-                    "format": "directory-path"
-                },
-                "meta_t_input": {
-                    "type": "string",
-                    "description": "Directory path to meta_t files",
-                    "format": "directory-path"
-                },
-                "long_reads_input": {
-                    "type": "string",
-                    "description": "Directory path to long read files"
-                },
-                "output_dir": {
-                    "type": "string",
-                    "format": "directory-path"
-                }
-            },
-            "required": [
-                "meta_g_input",
-                "meta_t_input",
-                "output_dir"
-            ]
+        "output_dir": {
+          "type": "string",
+          "format": "directory-path",
+          "description": "Directory path to output files"
         }
+      },
+      "required": ["output_dir", "dna_input", "rna_input", "long_reads_input"]
     },
-    "allOf": [
-        {
-            "$ref": "#/definitions/metat_downsampling"
-        },
-        {
-            "$ref": "#/definitions/preprocessing"
-        },
-        {
-            "$ref": "#/definitions/assembly"
-        },
-        {
-            "$ref": "#/definitions/required"
-        }
-    ],
-    "properties": {
+    "preprocessing": {
+      "title": "preprocessing",
+      "type": "object",
+      "description": "Preprocessing parameters",
+      "default": "",
+      "properties": {
         "run_preprocessing": {
-            "type": "boolean",
-            "default": true
+          "type": "boolean",
+          "default": true
         },
-        "remove_host": {
-            "type": "boolean"
-        },
-        "drop_orphans": {
-            "type": "boolean"
-        },
-        "kraken2_min_hit_groups": {
-            "type": "integer",
-            "default": 10
+        "run_qa": {
+          "type": "boolean"
         },
         "run_sortmerna": {
-            "type": "boolean"
+          "type": "boolean"
         },
-        "remote_input_dir": {
-            "type": "string"
+        "qc_minlen": {
+          "type": "integer",
+          "description": "Minimum read length to pass quality control",
+          "default": 45
+        },
+        "qc_params_shotgun": {
+          "type": "string",
+          "description": "bbduk quality control parameters",
+          "default": "qtrim=rl trimq=3 maq=25 ktrim=r k=23 mink=11 hdist=1 ftm=5 entropy=0.5 entropywindow=50 entropyk=5 tpe tbo"
+        },
+        "remove_host_kraken2_db": {
+          "type": "boolean",
+          "description": "Path to a kraken2 database"
+        },
+        "remove_host": {
+          "type": "boolean"
+        },
+        "drop_orphans": {
+          "type": "boolean"
+        },
+        "kraken2_min_hit_groups": {
+          "type": "integer",
+          "default": 10
+        },
+        "sortmerna_db": {
+          "type": "boolean",
+          "description": "Path to a sortmerna database"
         }
+      },
+      "required": [
+        "qc_minlen",
+        "qc_params_shotgun",
+        "remove_host_kraken2_db",
+        "sortmerna_db"
+      ]
+    },
+    "rnaseq_downsampling": {
+      "title": "RNAseq downsampling",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "subsample_percentile": {
+          "type": "integer",
+          "default": 100,
+          "hidden": true
+        },
+        "subsample_random_seed": {
+          "type": "integer",
+          "default": 313,
+          "hidden": true
+        }
+      }
     }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/required"
+    },
+    {
+      "$ref": "#/definitions/preprocessing"
+    },
+    {
+      "$ref": "#/definitions/rnaseq_downsampling"
+    }
+  ]
 }

@@ -15,7 +15,8 @@ def keep_orphans = (params.keep_orphans || false)
 
 def asset_dir = "${projectDir}/nevermore/assets"
 
-print asset_dir
+params.subsample = [:]
+params.subsample.subset = "metaT"
 
 process concat_singles {
     input:
@@ -70,7 +71,7 @@ workflow nevermore_simple_preprocessing {
 						.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 						.map { sample, counts -> return counts }
 						.collect(),
-					params.subsample.percentile
+					params.subsample_percentile
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
 
