@@ -20,17 +20,17 @@ workflow {
 	// input short reads
 	nvm_input_ch = Channel.empty()
 	metaT_ch = Channel.empty()
-	if (params.rna_input) {
+	if (params.rna_input_dir) {
 		metaT_input(
-			Channel.fromPath(params.rna_input + "/*", type: "dir")
+			Channel.fromPath(params.rna_input_dir + "/*", type: "dir")
 		)
 		metaT_ch = metaT_input.out.reads
 		nvm_input_ch = nvm_input_ch.concat(metaT_ch)
 	}
 	metaG_ch = Channel.empty()
-	if (params.dna_input) {
+	if (params.dna_input_dir) {
 		metaG_input(
-			Channel.fromPath(params.dna_input + "/*", type: "dir")
+			Channel.fromPath(params.dna_input_dir + "/*", type: "dir")
 		)
 		metaG_ch = metaG_input.out.reads
 		nvm_input_ch = nvm_input_ch.concat(metaG_ch)

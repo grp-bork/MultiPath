@@ -11,17 +11,17 @@
       "description": "",
       "default": "",
       "properties": {
-        "dna_input": {
+        "dna_input_dir": {
           "type": "string",
           "format": "directory-path",
           "description": "Directory path to WGS files"
         },
-        "rna_input": {
+        "rna_input_dir": {
           "type": "string",
           "format": "directory-path",
           "description": "Directory path to RNAseq files"
         },
-        "long_reads_input": {
+        "long_reads_input_dir": {
           "type": "string",
           "format": "directory-path",
           "description": "Directory path to long read files"

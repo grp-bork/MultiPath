@@ -41,7 +41,7 @@ workflow nevermore_simple_preprocessing {
 
 	main:
 		rawcounts_ch = Channel.empty()
-		if (params.run_qa || params.subsample.subset) {
+		if (params.run_qa || (params.subsample.subset && params.subsample_percentile < 100.0)) {
 
 			fastqc(fastq_ch, "raw")
 			rawcounts_ch = fastqc.out.counts
@@ -54,7 +54,7 @@ workflow nevermore_simple_preprocessing {
 				)
 			}
 
-			if (params.subsample.subset) {
+			if (params.subsample.subset && params.subsample_percentile < 100.0) {
 				
 				fastq_ch
 					.branch {
@@ -62,6 +62,8 @@ workflow nevermore_simple_preprocessing {
 						no_subsample: true
 					}
 					.set { check_subsample_ch }
+
+				check_subsample_ch.dump(pretty: true, tag: "check_subsample_ch")
 				// subsample_ch = fastq_ch
 				// 	.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 				// subsample_ch.dump(pretty: true, tag: "subsample_ch")

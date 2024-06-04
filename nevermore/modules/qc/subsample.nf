@@ -25,13 +25,23 @@ process calculate_library_size_cutoff {
 		)
 	)
 	percentile = ${percentile}
-	percentiles = statistics.quantiles(d.values(), n=100)
-	mean_low_counts = statistics.mean(v for v in d.values() if v < percentiles[percentile - 1])
+	try:
+		percentiles = statistics.quantiles(d.values(), n=100)
+	except statistics.StatisticsError:
+		percentiles = None
+	if percentiles is not None:
+		mean_low_counts = statistics.mean(v for v in d.values() if v < percentiles[percentile - 1])
+	else:
+		mean_low_counts = list(d.values())[0]
 
 	with open('library_sizes.txt', 'wt') as _out:
 		print(*('sample', 'size', 'do_subsample', 'target_size'), sep='\\t', file=_out)
 		for k, v in d.items():
-			print(k, v, int(not v < percentiles[percentile - 1]), int(mean_low_counts + 0.5), sep='\\t', file=_out)
+			if percentiles is not None:
+				do_subsample = v >= percentiles[percentile - 1]
+			else:
+				do_subsample = False
+			print(k, v, int(do_subsample), int(mean_low_counts + 0.5), sep='\\t', file=_out)
 
 	print(mean_low_counts)
 
