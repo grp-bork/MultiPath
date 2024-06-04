@@ -22,7 +22,7 @@ workflow {
 	metaT_ch = Channel.empty()
 	if (params.rna_input) {
 		metaT_input(
-			Channel.fromPath(params.metaT_input_dir + "/*", type: "dir")
+			Channel.fromPath(params.rna_input + "/*", type: "dir")
 		)
 		metaT_ch = metaT_input.out.reads
 		nvm_input_ch = nvm_input_ch.concat(metaT_ch)
@@ -30,7 +30,7 @@ workflow {
 	metaG_ch = Channel.empty()
 	if (params.dna_input) {
 		metaG_input(
-			Channel.fromPath(params.metaG_input_dir + "/*", type: "dir")
+			Channel.fromPath(params.dna_input + "/*", type: "dir")
 		)
 		metaG_ch = metaG_input.out.reads
 		nvm_input_ch = nvm_input_ch.concat(metaG_ch)

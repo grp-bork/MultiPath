@@ -1,3 +1,5 @@
+params.annotation = [:]
+params.annotation.carveme = [:]
 params.annotation.carveme.solver = "scip"
 params.annotation.carveme.gapfill_model = "M3"
 params.annotation.carveme.media_db = ""

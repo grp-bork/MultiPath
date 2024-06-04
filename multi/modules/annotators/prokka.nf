@@ -1,3 +1,5 @@
+params.annotation = [:]
+params.annotation.prokka = [:]
 params.annotation.prokka.kingdom = "Bacteria"
 params.annotation.prokka.genus = "Genus"
 
