@@ -55,6 +55,8 @@ workflow nevermore_simple_preprocessing {
 			}
 
 			if (params.subsample.subset && params.subsample_percentile < 100.0) {
+
+				fastq_ch.dump(pretty: true, tag: "fastq_ch")
 				
 				fastq_ch
 					.branch {
