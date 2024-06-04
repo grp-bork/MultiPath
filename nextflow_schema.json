@@ -110,11 +110,5 @@
     {
       "$ref": "#/definitions/rnaseq_downsampling"
     }
-  ],
-  "properties": {
-    "run_qa": {
-      "type": "string",
-      "default": "None"
-    }
-  }
+  ]
 }
