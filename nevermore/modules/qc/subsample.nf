@@ -11,7 +11,7 @@ process calculate_library_size_cutoff {
 
 	script:
 	"""
-	#!/usr/bin/env python
+	#!/usr/bin/env python3
 	
 	import glob
 	import statistics
