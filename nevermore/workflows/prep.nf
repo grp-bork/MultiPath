@@ -41,7 +41,7 @@ workflow nevermore_simple_preprocessing {
 
 	main:
 		rawcounts_ch = Channel.empty()
-		if (params.run_qa || (params.subsample.subset && params.subsample_percentile < 100.0)) {
+		if (params.run_qa || (params.subsample.subset && params.subsample_percentile < 100.0 && params.subsample_percentile > 0.0)) {
 
 			fastqc(fastq_ch, "raw")
 			rawcounts_ch = fastqc.out.counts
@@ -54,7 +54,7 @@ workflow nevermore_simple_preprocessing {
 				)
 			}
 
-			if (params.subsample.subset && params.subsample_percentile < 100.0) {
+			if (params.subsample.subset && params.subsample_percentile < 100.0 && params.subsample_percentile > 0.0) {
 
 				fastq_ch.dump(pretty: true, tag: "fastq_ch")
 				
@@ -70,13 +70,13 @@ workflow nevermore_simple_preprocessing {
 				// subsample_ch = fastq_ch
 				// 	.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 				// subsample_ch.dump(pretty: true, tag: "subsample_ch")
-
+				
 				calculate_library_size_cutoff(
 					fastqc.out.counts
 						.filter { params.subsample.subset == "all" || it[0].library_source == params.subsample.subset }
 						.map { sample, counts -> return counts }
 						.collect(),
-					params.subsample_percentile
+					params.subsample_percentile, 
 				)
 				calculate_library_size_cutoff.out.library_sizes.view()
 

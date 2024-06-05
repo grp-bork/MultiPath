@@ -6,6 +6,7 @@ include { carveme } from "../modules/annotators/carveme"
 include { memote } from "../modules/reports/memote"
 include { salmon_index; salmon_quant } from "../modules/profilers/salmon"
 
+params.run_memote = true // DISABLE AFTER CLOWM DEPLOYMENT COMPLETE!
 
 workflow multi_main {
 	take:
@@ -68,8 +69,10 @@ workflow multi_main {
 			"${projectDir}/assets/carveme/media_db.tsv"
 		)
 
-		// benchmarking metabolic network model
-		memote(carveme.out.model)
+		if (params.run_memote) {
+			// benchmarking metabolic network model
+			memote(carveme.out.model)
+		}
 
 		// this is from protoflow
 		// salmon_quant_ch = nevermore_main.output.fastqs

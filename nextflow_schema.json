@@ -32,7 +32,7 @@
           "description": "Directory path to output files"
         }
       },
-      "required": ["output_dir", "dna_input", "rna_input", "long_reads_input"]
+      "required": ["output_dir", "dna_input_dir", "rna_input_dir"]
     },
     "preprocessing": {
       "title": "preprocessing",
