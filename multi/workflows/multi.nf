@@ -6,7 +6,7 @@ include { carveme } from "../modules/annotators/carveme"
 include { memote } from "../modules/reports/memote"
 include { salmon_index; salmon_quant } from "../modules/profilers/salmon"
 
-params.run_memote = true // DISABLE AFTER CLOWM DEPLOYMENT COMPLETE!
+params.run_memote = false // DISABLE AFTER CLOWM DEPLOYMENT COMPLETE!
 
 workflow multi_main {
 	take:
