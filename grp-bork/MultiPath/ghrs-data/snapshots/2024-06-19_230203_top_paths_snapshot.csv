@@ -1,0 +1,9 @@
+url_path,views_total,views_unique
+/grp-bork/MultiPath,16,3
+/grp-bork/MultiPath/commits/main,14,1
+/grp-bork/MultiPath/blob/main/nextflow_schema.json,4,2
+/grp-bork/MultiPath/blob/main/nextflow.config,4,1
+/grp-bork/nevermore_multi,3,1
+/grp-bork/MultiPath/actions/workflows/github-repo-stats.yml,2,1
+/grp-bork/MultiPath/blob/main/main.nf,2,1
+/grp-bork/MultiPath/tree/1e1efeee8ea8d902b9968b358f2e1c4b33a29fd1,1,1
