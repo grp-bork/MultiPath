@@ -16,13 +16,16 @@ def keep_orphans = (params.keep_orphans || false)
 def asset_dir = "${projectDir}/nevermore/assets"
 
 // this nonsense parameter-rearrangement is necessary for nf-core schema/clowm compatibility
+
+print "PARAMS_IN_PREP_BEFORE: ${params}"
+
 params.subsample_subset = null
 params.subsample_percentile = 100.0
 params.subsample = [:]
 params.subsample.subset = params.subsample_subset
 params.subsample.percentile = params.subsample_percentile
 
-print "PARAMS_IN_PREP: ${params}"
+print "PARAMS_IN_PREP_AFTER: ${params}"
 
 process concat_singles {
     input:
