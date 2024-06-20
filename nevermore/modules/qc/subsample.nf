@@ -1,5 +1,9 @@
-params.subsample = [:]
+// this nonsense parameter-rearrangement is necessary for nf-core schema/clowm compatibility
+
 params.subsample_random_seed = 313
+params.subsample = [:]
+params.subsample.random_seed = params.subsample_random_seed
+
 
 process calculate_library_size_cutoff {
 	input:
@@ -52,7 +56,7 @@ process calculate_library_size_cutoff {
 }
 
 process subsample_reads {
-	container "docker://quay.io/biocontainers/seqtk:1.4--he4a0461_2"
+	container "quay.io/biocontainers/seqtk:1.4--he4a0461_2"
 
 	input:
 	tuple val(sample), path(fastqs), val(target_size)
@@ -72,11 +76,11 @@ process subsample_reads {
 
 	if (r1_files.size() != 0) {
         def r1_prefix = r1_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
-		seqtk_calls += "${decomp} -dc ${r1_files[0]} | seqtk sample -s ${params.subsample_random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R1.fastq.gz\n"		
+		seqtk_calls += "${decomp} -dc ${r1_files[0]} | seqtk sample -s ${params.subsample.random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R1.fastq.gz\n"		
 	}
 	if (r2_files.size() != 0) {
         def r2_prefix = r2_files[0].name.replaceAll(/\.fastq.(gz|bz2)$/, "")
-		seqtk_calls += "${decomp} -dc ${r2_files[0]} | seqtk sample -s ${params.subsample_random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R2.fastq.gz\n"
+		seqtk_calls += "${decomp} -dc ${r2_files[0]} | seqtk sample -s ${params.subsample.random_seed} - ${target_size} | gzip -c - > subsampled/${sample.id}/${sample.id}_R2.fastq.gz\n"
 	}
 
 	"""
