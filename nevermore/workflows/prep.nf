@@ -22,6 +22,7 @@ params.subsample = [:]
 params.subsample.subset = params.subsample_subset
 params.subsample.percentile = params.subsample_percentile
 
+print "PARAMS_IN_PREP: ${params}"
 
 process concat_singles {
     input:
