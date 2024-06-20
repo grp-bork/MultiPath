@@ -1,5 +1,5 @@
 process prodigal {
-	container "docker://quay.io/biocontainers/prodigal:2.6.3--h031d066_8"
+	container "quay.io/biocontainers/prodigal:2.6.3--h031d066_8"
 
 	input:
 	tuple val(sample), path(genome_fasta)
