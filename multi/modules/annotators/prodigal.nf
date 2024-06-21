@@ -1,5 +1,6 @@
 process prodigal {
 	container "quay.io/biocontainers/prodigal:2.6.3--h031d066_8"
+	label "default"
 
 	input:
 	tuple val(sample), path(genome_fasta)
