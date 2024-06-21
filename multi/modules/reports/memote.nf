@@ -1,5 +1,6 @@
 process memote {
-	container "docker://quay.io/biocontainers/memote:0.17.0--pyhdfd78af_0"
+	container "quay.io/biocontainers/memote:0.17.0--pyhdfd78af_0"
+	label "default"
 
 	input:
 	tuple val(sample), path(model)

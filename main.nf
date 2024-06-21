@@ -14,6 +14,7 @@ include { multi_main } from "./multi/workflows/multi"
 
 params.run_qa = true
 
+print "PARAMS: ${params}"
 
 workflow {
 

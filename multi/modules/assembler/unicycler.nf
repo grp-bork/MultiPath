@@ -1,5 +1,6 @@
 process unicycler {
-	container "docker://quay.io/biocontainers/unicycler:0.4.4--py38h5cf8b27_6"
+	container "quay.io/biocontainers/unicycler:0.4.4--py38h5cf8b27_6"
+	label "highmem_large"
 
 	input:
 	tuple val(sample), path(short_reads), path(long_reads)
