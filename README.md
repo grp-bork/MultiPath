@@ -3,7 +3,7 @@ MultiPath
 
 `UC-Multi` (UseCase Multi-omics) is a multi-omics [workflow](https://github.com/mdsufz/MULTI) originally developed at the Helmholtz Centre for Environmental Research GmbH (UFZ) as a use-case for  [NFDI4Microbiota](https://nfdi4microbiota.de/). `MultiPath` is a nextflow-port developed at EMBL Heidelberg, powered by the independent [nevermore](https://github.com/cschu/nevermore) workflow component library.
 
-![MultiPath Workflow Schema](docs/multipath.svg)
+![MultiPath Workflow Schema](https://raw.githubusercontent.com/grp-bork/MultiPath/main/docs/multipath.svg)
 
 
 ### Collaborators
