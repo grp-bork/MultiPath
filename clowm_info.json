@@ -13,7 +13,7 @@
     "long_reads_input_dir": "s3://example-data-multipath/long_reads/"
   },
   "dois": [
-    "10.5281/zenodo.13143222"
+    "10.5281/zenodo.13143221"
   ],
   "resourceParameters": [
     "remove_host_kraken2_db",
