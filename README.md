@@ -46,7 +46,7 @@
 The `MultiPath workflow` is a multi-omics workflow for the integration of multi-omics data of microbial species. The [workflow](https://github.com/mdsufz/MULTI) was originally developed at the Helmholtz Centre for Environmental Research GmbH (UFZ) within the `UC-Multi` use case for [NFDI4Microbiota](https://nfdi4microbiota.de/). `MultiPath` is a nextflow port developed at EMBL Heidelberg, powered by the independent [nevermore](https://github.com/cschu/nevermore) workflow component library.
 
 #### Citation
-This workflow: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13143222.svg)](https://doi.org/10.5281/zenodo.13143222)
+This workflow: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13143221.svg)](https://doi.org/10.5281/zenodo.13143221)
 
 ---
 # Overview
