@@ -8,9 +8,9 @@
     "output_dir"
   ],
   "exampleParameters": {
-    "dna_input_dir": "s3://example-data-multipath/meta_g/",
-    "rna_input_dir": "s3://example-data-multipath/meta_t/",
-    "long_reads_input_dir": "s3://example-data-multipath/long_reads/"
+    "dna_input_dir": "s3://workflow-exampledata/multipath/meta_g/",
+    "rna_input_dir": "s3://workflow-exampledata/multipath/meta_t/",
+    "long_reads_input_dir": "s3://workflow-exampledata/multipath/long_reads/"
   },
   "dois": [
     "10.5281/zenodo.13143221"
