@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/grp-bork/MultiPath,4,3
+/grp-bork/MultiPath/blob/main/clowm_info.json,4,1
+/grp-bork/multipath,1,1
+/grp-bork/MultiPath/blob/main/main.nf,1,1
+/grp-bork/MultiPath/blob/main/multi/workflows/multi.nf,1,1
+/grp-bork/MultiPath/blob/main/nevermore/workflows/prep.nf,1,1
+/grp-bork/MultiPath/blob/main/nextflow.config,1,1
+/grp-bork/MultiPath/blob/main/nextflow_schema.json,1,1
+/grp-bork/MultiPath/commits/main,1,1
+/grp-bork/MultiPath/edit/main/clowm_info.json,1,1
