@@ -1,6 +1,7 @@
 process unicycler {
 	container "quay.io/biocontainers/unicycler:0.4.4--py38h5cf8b27_6"
-	label "highmem_large"
+	label "compute_xlarge"
+	cpus 64
 
 	input:
 	tuple val(sample), path(short_reads), path(long_reads)
