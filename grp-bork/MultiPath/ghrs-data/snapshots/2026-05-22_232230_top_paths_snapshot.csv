@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/grp-bork/MultiPath/tree/main/multi/modules,3,1
+/grp-bork/MultiPath/blob/main/nextflow.config,2,1
+/grp-bork/MultiPath/tree/main/multi/modules/reports,2,1
+/grp-bork/MultiPath,1,1
+/grp-bork/MultiPath/blob/main/multi/modules/annotators/carveme.nf,1,1
+/grp-bork/MultiPath/blob/main/multi/modules/profilers/salmon.nf,1,1
+/grp-bork/MultiPath/blob/main/multi/modules/reports/memote.nf,1,1
+/grp-bork/MultiPath/graphs/commit-activity,1,1
+/grp-bork/MultiPath/tree/main/multi,1,1
+/grp-bork/MultiPath/tree/main/multi/modules/annotators,1,1
