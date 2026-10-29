@@ -23,8 +23,7 @@ process bowtie2_build {
 
 
 process bowtie2_align {
-	// container "quay.io/biocontainers/bowtie2:2.5.3--py39h6fed5c7_1"
-	container "registry.git.embl.de/schudoma/bowtie2-docker:latest"
+	container "ghcr.io/cschu/align-docker:v0.6.0"
 	tag "${sample.id}"
 
 	input:

@@ -1,5 +1,5 @@
 process flagstats {
-    container "registry.git.embl.de/schudoma/align-docker:latest"
+    container "ghcr.io/cschu/align-docker:v0.6.0"
     label "default"
 
     input:
